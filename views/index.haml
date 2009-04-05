@@ -1,0 +1,47 @@
+!!!
+%html{ :xmlns => "http://www.w3.org/1999/xhtml", :"xml:lang" =>"en", :lang =>"en"}
+  %head
+    %title== Generic Microblog 
+    %link{:rel => "stylesheet", :type => "text/css", :href => "style.css"}
+  %body
+    - if @username
+      #header
+        #title
+          %a{:href => "/all"}
+            View All Posts &raquo;
+        #logout
+          %a{:href => "logout"}
+            Logout
+            = @username
+        #messagebox 
+          Post something:
+          %form{:method => "post", :action => "/entry", :id => "send-comment"}
+            %input{:type => "textarea", :name => "text", :id => "name"}
+            %button{:type => "submit", :class => "btn"}
+              %span
+                %span
+                  %b
+                  Submit
+      - else
+      #header
+        #sign_in_button
+          %form{:method => "post", :action => "/login"}
+            %input{:id => "openid_identifier", :name => "openid_identifier", :type => "hidden", :value => "https://www.google.com/accounts/o8/id"}
+            %button{:type => "submit", :class => "btn"}
+              %span
+                %span
+                  %b
+                  Sign in with
+                  %img{:src => "google.png"}              
+    #content
+      - if @username
+        - @entries.each do |entry|
+          %li
+          %blockquote
+            = escaped entry
+      - else
+        #welcome
+          This is Roosterbear
+          #tagline
+            Like Twitter, Except Not As Cool
+                  

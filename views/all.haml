@@ -1,0 +1,22 @@
+!!!
+%html{ :xmlns => "http://www.w3.org/1999/xhtml", :"xml:lang" =>"en", :lang =>"en"}
+  %head
+    %title== Generic Microblog 
+    %link{:rel => "stylesheet", :type => "text/css", :href => "style.css"}
+  %body
+    #header
+      #title
+        %a{:href => "/"}
+          View Your Posts &raquo;
+      #logout
+        - if session[:openid]
+          %a{:href => "logout"}
+            Logout
+            = @username
+             
+    #content
+      - @allentries.each do |entry|
+        %li
+        %blockquote
+          = escaped entry
+          %hr

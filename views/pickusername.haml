@@ -1,0 +1,20 @@
+!!!
+%html{ :xmlns => "http://www.w3.org/1999/xhtml", :"xml:lang" =>"en", :lang =>"en"}
+  %head
+    %title== "ROOSTERBEAR" 
+    %link{:rel => "stylesheet", :type => "text/css", :href => "style.css"}
+  %body
+    #pick_username
+      - if session[:error]
+        = session[:error]
+        - session[:error] = nil
+      - if session[:openid]
+        %p{:style => "margin-left:10px;"} 
+          Pick a username:
+          %form{:method => "post", :action => "/save", :style => "margin-left:10px;"}
+            %input{:type => "textarea", :name => "username"}
+            %button{:type => "submit", :class => "btn"}
+              %span
+                %span
+                  %b
+                  Submit
