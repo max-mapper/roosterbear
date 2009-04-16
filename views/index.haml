@@ -1,7 +1,7 @@
 !!!
 %html{ :xmlns => "http://www.w3.org/1999/xhtml", :"xml:lang" =>"en", :lang =>"en"}
   %head
-    %title== Generic Microblog 
+    %title== Roosterbear
     %link{:rel => "stylesheet", :type => "text/css", :href => "style.css"}
   %body
     - if @username
@@ -14,7 +14,7 @@
             Logout
             = @username
         #messagebox 
-          Post something:
+          Growlcluck:
           %form{:method => "post", :action => "/entry", :id => "send-comment"}
             %input{:type => "textarea", :name => "text", :id => "name"}
             %button{:type => "submit", :class => "btn"}
@@ -38,10 +38,10 @@
         - @entries.each do |entry|
           %li
           %blockquote
-            = escaped entry
+            = entry
       - else
         #welcome
           This is Roosterbear
           #tagline
-            Like Twitter, Except Not As Cool
+            It's the new Twitter
                   

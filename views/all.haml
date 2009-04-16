@@ -1,7 +1,7 @@
 !!!
 %html{ :xmlns => "http://www.w3.org/1999/xhtml", :"xml:lang" =>"en", :lang =>"en"}
   %head
-    %title== Generic Microblog 
+    %title== Roosterbear 
     %link{:rel => "stylesheet", :type => "text/css", :href => "style.css"}
   %body
     #header
@@ -18,5 +18,4 @@
       - @allentries.each do |entry|
         %li
         %blockquote
-          = escaped entry
-          %hr
+          = entry

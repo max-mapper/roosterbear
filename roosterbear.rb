@@ -46,15 +46,10 @@ end
 
 get '/all' do
   @allentries = []
-  @redis.set_members('usernames').each do |username|
-    entry_ids = @redis.list_range("#{username}:entries", 0, -1) rescue nil
-    if entry_ids
-      entry_ids.each do |id|
-        @allentries << @redis["#{username}:entries:#{id}"]
-      end
-    end
+  @entries = @redis.list_range("recent:entries", 0, -1) rescue nil
+  @entries.each do |id|
+    @allentries << @redis[id]
   end
-  @allentries.reverse!
   haml :all
 end
 
@@ -101,6 +96,10 @@ post '/entry' do
   id = @redis.incr("entries")
   @redis.push_tail("#{@username}:entries", id)
   @redis["#{@username}:entries:#{id}"] = params['text']
+  
+  recentid = @redis.incr("recententries")
+  @redis.push_head("recent:entries", "#{@username}:entries:#{id}")
+  @redis.list_trim 'recent:entries', 0, 99
   redirect '/'
 end
 

@@ -1,6 +1,6 @@
 body {
   background-image:url('/roosterbear.png'); 
-  background-color:#f5f5eb;
+  background-color:#fff;
   background-repeat:no-repeat;
   background-attachment:fixed;
   background-position:bottom right;
@@ -11,7 +11,7 @@ body {
 
 a {
   text-decoration: none;
-  color:#535e5d;
+  color:#FFF;
 }
 
 img {
@@ -21,7 +21,7 @@ img {
 #messagebox, #sign_in_button {
   padding-left:10px;
   padding-top:10px;
-  color: #535e5d;
+  color: #FFF;
   vertical-align:bottom;
   margin: 0 auto;
   text-align:center;
