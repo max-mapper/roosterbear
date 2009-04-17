@@ -1,0 +1,13 @@
+---
+  environment: development
+  chdir: /var/www/roosterbear
+  address: 127.0.0.1
+  user: roosterbear
+  group: roosterbear
+  port: 4567
+  pid: /var/www/roosterbear/tmp/thin.pid
+  rackup: /var/www/roosterbear/config.ru
+  log: /var/www/roosterbear/log/thin.log
+  max_conns: 512
+  timeout: 30
+  daemonize: true
