@@ -5,7 +5,7 @@ require 'rack/openid'
 require 'haml'
 
 set     :app_file,      'roosterbear.rb'
-set     :environment,	:development
+set     :environment, :development
 disable :run
 
 run Sinatra::Application

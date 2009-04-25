@@ -3,13 +3,15 @@
   %head
     %title== "ROOSTERBEAR" 
     %link{:rel => "stylesheet", :type => "text/css", :href => "style.css"}
+    %link{:rel => "shortcut icon", :href => "favicon.ico"}
   %body
-    #pick_username
+    #header
+    #pick_username{:style => "color:#FF0;"} 
       - if session[:error]
         = session[:error]
         - session[:error] = nil
       - if session[:openid]
-        %p{:style => "margin-left:10px;"} 
+        %p{:style => "margin-left:10px;color:#FFF;"} 
           Pick a username:
           %form{:method => "post", :action => "/save", :style => "margin-left:10px;"}
             %input{:type => "textarea", :name => "username"}

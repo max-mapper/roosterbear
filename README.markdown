@@ -1,5 +1,4 @@
-# Generic Microblog 
-# Codename 'Roosterbear'
+# Roosterbear
 
 2009 Max Ogden (max@maxogden.com)
 

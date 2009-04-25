@@ -1,22 +1,28 @@
 !!!
 %html{ :xmlns => "http://www.w3.org/1999/xhtml", :"xml:lang" =>"en", :lang =>"en"}
   %head
-    %title== Roosterbear
     %link{:rel => "stylesheet", :type => "text/css", :href => "style.css"}
+    %link{:rel => "stylesheet", :type => "text/css", :href => "library.css"}
+    %link{:rel => "shortcut icon", :href => "favicon.ico"}
+    %title== Roosterbear
+    %script{:type => "text/JavaScript", :src => "rounded_corners.inc.js"}
+    %script{:type => "text/JavaScript", :src => "http://jqueryjs.googlecode.com/files/jquery-1.3.js"}
+
   %body
     - if @username
       #header
-        #title
+        #nav
           %a{:href => "/all"}
             View All Posts &raquo;
         #logout
           %a{:href => "logout"}
             Logout
-            = @username
+            %strong
+              = @username
         #messagebox 
           Growlcluck:
           %form{:method => "post", :action => "/entry", :id => "send-comment"}
-            %input{:type => "textarea", :name => "text", :id => "name"}
+            %input{:type => "text", :value => "type something or post an image/vimeo/youtube url", :name => "status", :id => "status"}
             %button{:type => "submit", :class => "btn"}
               %span
                 %span
@@ -32,16 +38,52 @@
                 %span
                   %b
                   Sign in with
-                  %img{:src => "google.png"}              
+                  %img{:src => "google.png"}
     #content
       - if @username
         - @entries.each do |entry|
-          %li
-          %blockquote
-            = entry
+          .bubble
+            .rounded
+              %blockquote
+                = auto_html(escaped entry)
+            %cite.rounded
+              = @username
+            
       - else
         #welcome
-          This is Roosterbear
+          This is Glitterbacon
           #tagline
-            It's the new Twitter
-                  
+            It runs on Roosterbear
+          #tagline2
+            Which just so happens to be the new Twitter
+      :javascript
+        settings = {
+        tl: { radius: 10 },
+        tr: { radius: 10 },
+        bl: { radius: 10 },
+        br: { radius: 10 },
+        antiAlias: true,
+        autoPad: true
+        }
+        var myBoxObject = new curvyCorners(settings, "rounded");
+        myBoxObject.applyCornersToAll();
+        
+        $(document).ready(function() {
+          $('input[type="text"]').addClass("idleField");
+               $('input[type="text"]').focus(function() {
+                 $(this).removeClass("idleField").addClass("focusField");
+                if (this.value == this.defaultValue){ 
+                  this.value = '';
+            }
+            if(this.value != this.defaultValue){
+                this.select();
+              }
+            });
+            $('input[type="text"]').blur(function() {
+              $(this).removeClass("focusField").addClass("idleField");
+                if ($.trim(this.value) == ''){
+                this.value = (this.defaultValue ? this.defaultValue : '');
+            }
+            });
+        });
+            
