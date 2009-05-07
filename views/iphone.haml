@@ -1,0 +1,44 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml", :"xml:lang" =>"en", :lang =>"en"}
+  %head
+    %meta{:id => "viewport", :name => "viewport", :content => "width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"}
+    %title== Roosterbear
+    %link{:rel => "stylesheet", :type => "text/css", :href => "iphone.css"}
+    %link{:rel => "shortcut icon", :href => "favicon.ico"}
+    %script{:type => "text/javascript", :src => "http://jqueryjs.googlecode.com/files/jquery-1.3.js"}
+
+  %body
+    - if @username
+      #header
+        #messagebox
+          #messageform
+            %form{:method => "post", :action => "/entry", :id => "send-comment"}
+              %textarea{:value => "", :name => "status", :id => "status", :style => "margin:10px 0; width: 97%;"}
+              %center
+                %button{:type => "submit", :class => "white button"}
+                  Growlcluck
+
+    - else
+      #header
+      
+    #content
+      #posts
+        - if @username
+          - @allentries.each do |post|
+            - post.each do |entry, username|
+              %ul
+                %li
+                  = auto_html(escaped entry)
+                  %span{:id => "username"}
+                    = username
+        - else
+          %center
+            #welcome
+              %h1
+                This is Glitterbacon 
+            #sign_in_button
+              %center
+                %form{:method => "post", :action => "/login"}
+                  %input{:id => "openid_identifier", :name => "openid_identifier", :type => "hidden", :value => "https://www.google.com/accounts/o8/id"}
+                  %button{:type => "submit", :class => "white button"}
+                    Sign in with Google

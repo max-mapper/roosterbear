@@ -10,21 +10,20 @@ h1, h2 {
   font-size:20px;
 }
 
+blockquote {
+  overflow: hidden;
+}
+
 a {
   text-decoration: none;
   color:#FFF;
-}
-
-img {
-  vertical-align:bottom;
 }
 
 #faildolphin {
   margin-left:30%;
 }
 
-#messagebox, #sign_in_button {
-  padding-top:10px;
+#sign_in_button {
   color: #FFF;
   vertical-align:bottom;
   margin: 0px;
@@ -32,7 +31,35 @@ img {
 }
 
 #messagebox {
-  padding-right: 150px;
+  position:relative;
+  color:#FFF;
+  clear:none;
+  float:none;
+  display:none;
+  margin: 0px auto 0 auto;
+  height: 200px;
+  background: #FFF;
+  z-index:2;
+}
+
+#messageform {
+  position:relative;
+  margin: 0px auto 0 auto;
+  padding:0px;
+  text-align:center;
+}
+
+#messageform input {
+  width:99.9%;
+  margin:0px;
+  padding:0px;
+  height:137px;
+  font-size:100px;
+  border:none;
+}
+
+#messageform button {
+  display:none;
 }
 
 #pick_username {
@@ -41,8 +68,12 @@ img {
   text-align:center;
 }
 
+#posts {
+  padding-top:50px;
+}
+
 #content {
-  margin-top:50px;  
+  z-index:-1;
 }
 
 #welcome {
@@ -63,7 +94,8 @@ img {
   padding-top:15px;
 }
 
-#title {
+#title, #postToggle {
+  float:none;
   color: white;
   display: block;
   font-size: 20px;
@@ -73,6 +105,13 @@ img {
   text-align: center;
   padding-right:160px;
   padding-top:3px;
+}
+
+#postToggle img {
+  position: relative;
+  top: 4px;
+  width: 25px;
+  height: 25px;
 }
 
 #tagline {
@@ -98,14 +137,14 @@ img {
 }
 
 #send-comment {
-  padding-left:10px;
   display:inline;
   height:25px;
 }
 
 #sign_in_button {
   position:absolute;
-  right:10px;
+  top:7px;
+  right:15px;
 }
 
 #logout {

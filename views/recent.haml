@@ -2,35 +2,35 @@
 %html{ :xmlns => "http://www.w3.org/1999/xhtml", :"xml:lang" =>"en", :lang =>"en"}
   %head
     %title== Roosterbear
-    %script{:type => "text/JavaScript", :src => "../rounded_corners.inc.js"}
-    %script{:type => "text/JavaScript", :src => "../init.js"}
-    %link{:rel => "stylesheet", :type => "text/css", :href => "../style.css"}
-    %link{:rel => "stylesheet", :type => "text/css", :href => "../library.css"}
-    %link{:rel => "shortcut icon", :href => "../favicon.ico"}
+    %script{:type => "text/JavaScript", :src => "rounded_corners.inc.js"}
+    %script{:type => "text/JavaScript", :src => "init.js"}
+    %link{:rel => "stylesheet", :type => "text/css", :href => "style.css"}
+    %link{:rel => "stylesheet", :type => "text/css", :href => "library.css"}
+    %link{:rel => "shortcut icon", :href => "favicon.ico"}
   %body
     #header
       #nav
         %a{:href => "/"}
-          View Recent Posts &raquo;
+          View Your Posts &raquo;
       #title
-        = "#{@user}'s Growlclucks"
+        Recent Growlclucks
       #logout
         - if session[:openid]
           %a{:href => "logout"}
             Logout
             %strong
               = @username
-    #content
-      #posts           
-        - if @user
-          - @entries.each do |post|
-            - post.each do |entry, user|
+    #posts
+      #content
+        - if @username
+          - @allentries.each do |post|
+            - post.each do |entry, username|
               .bubble
                 .rounded
                   %blockquote
                     = auto_html(escaped entry)
                 %cite.rounded
-                  = user
+                  %a{:href => "/view/#{username}"}= username
     :javascript
       settings = {
       tl: { radius: 10 },

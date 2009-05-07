@@ -1,61 +1,90 @@
 !!!
-%html{ :xmlns => "http://www.w3.org/1999/xhtml", :"xml:lang" =>"en", :lang =>"en"}
+%html{:xmlns => "http://www.w3.org/1999/xhtml", :"xml:lang" =>"en", :lang =>"en"}
   %head
+    :javascript
+      if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)))
+        {
+        location.href='http://glitterbacon.com/iphone';
+        }
+    %title== Roosterbear
     %link{:rel => "stylesheet", :type => "text/css", :href => "style.css"}
     %link{:rel => "stylesheet", :type => "text/css", :href => "library.css"}
     %link{:rel => "shortcut icon", :href => "favicon.ico"}
-    %title== Roosterbear
-    %script{:type => "text/JavaScript", :src => "rounded_corners.inc.js"}
-    %script{:type => "text/JavaScript", :src => "http://jqueryjs.googlecode.com/files/jquery-1.3.js"}
+    %script{:type => "text/javascript", :src => "rounded_corners.inc.js"}
+    %script{:type => "text/javascript", :src => "http://jqueryjs.googlecode.com/files/jquery-1.3.js"}
+    %script{:type => "text/javascript", :src => "jqueryui-custom-core-tabs.js"}
 
   %body
     - if @username
+      #messagebox.widget
+        %ul.tabnav
+          %li
+            %a{:href => "#text"}
+              text
+          %li
+            %a{:href => "#url"}
+              url
+          %li
+            %a{:href => "#photo"}
+              photo
+          %li
+            %a{:href => "#video"}
+              video
+        
+        #text.tabdiv
+          #messageform
+            %form{:method => "post", :action => "/entry", :id => "send-comment"}
+              %input{:type => "text", :value => "type here, hit enter", :name => "status", :id => "status"}
+              %button{:type => "submit"}
+        #url.tabdiv
+          pending
+        #photo.tabdiv
+          pending
+        #video.tabdiv
+          pending
+
       #header
         #nav
-          %a{:href => "/all"}
-            View All Posts &raquo;
+          %a{:href => "/view/#{@username}"}
+            View Your Posts &raquo;
         #logout
           %a{:href => "logout"}
             Logout
             %strong
               = @username
-        #messagebox 
-          Growlcluck:
-          %form{:method => "post", :action => "/entry", :id => "send-comment"}
-            %input{:type => "text", :value => "type something or post an image/vimeo/youtube url", :name => "status", :id => "status"}
-            %button{:type => "submit", :class => "btn"}
-              %span
-                %span
-                  %b
-                  Submit
-      - else
+        #postToggle
+          %span{:id => "toggletext"}
+            Add A Growlcluck
+          %img{:id => "toggleimage", :src => "expand.png"}
+
+    - else
       #header
         #sign_in_button
-          %form{:method => "post", :action => "/login"}
-            %input{:id => "openid_identifier", :name => "openid_identifier", :type => "hidden", :value => "https://www.google.com/accounts/o8/id"}
+          %form{:method => "post", :action => "https://www.google.com/accounts/o8/ud?openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.return_to=http%3A%2F%2Fwww.glitterbacon.com%2Flogin%3F_method%3Dpost&openid.realm=http%3A%2F%2Fwww.glitterbacon.com%2F&openid.assoc_handle=ABSmpf6DNMw&openid.mode=checkid_setup&openid.ns.ext1=http%3A%2F%2Fopenid.net%2Fsrv%2Fax%2F1.0&openid.ext1.mode=fetch_request&openid.ext1.type.email=http%3A%2F%2Faxschema.org%2Fcontact%2Femail&openid.ext1.required=email"}
             %button{:type => "submit", :class => "btn"}
               %span
                 %span
                   %b
                   Sign in with
                   %img{:src => "google.png"}
-    #content
-      - if @username
-        - @entries.each do |entry|
-          .bubble
-            .rounded
-              %blockquote
-                = auto_html(escaped entry)
-            %cite.rounded
-              = @username
-            
-      - else
-        #welcome
-          This is Glitterbacon
-          #tagline
-            It runs on Roosterbear
-          #tagline2
-            Which just so happens to be the new Twitter
+    #posts
+      #content
+        - if @username
+          - @allentries.each do |post|
+            - post.each do |entry, username|
+              .bubble
+                .rounded
+                  %blockquote
+                    = auto_html(escaped entry)
+                %cite.rounded
+                  %a{:href => "/view/#{username}"}= username
+        - else
+          #welcome
+            This is Glitterbacon
+            #tagline
+              It runs on Roosterbear
+            #tagline2
+              Which just so happens to be the new Twitter
       :javascript
         settings = {
         tl: { radius: 10 },
@@ -69,21 +98,38 @@
         myBoxObject.applyCornersToAll();
         
         $(document).ready(function() {
+          $("#postToggle").click(function(){
+              if ($("#messagebox").is(":hidden")){
+                  $("#messagebox").slideDown("slow");
+                  $("#toggletext").attr("span", "Hello");
+                  console.log($("#toggletext").attr("span"));
+                  $("#toggleimage").attr("src", "contract.png");
+              }
+              else{
+                  $("#messagebox").slideUp("slow");
+                  $("#toggletext").attr("span", "Add A Growlcluck");
+                  $("#toggleimage").attr("src", "expand.png");
+                  }
+          });
+          
           $('input[type="text"]').addClass("idleField");
-               $('input[type="text"]').focus(function() {
-                 $(this).removeClass("idleField").addClass("focusField");
-                if (this.value == this.defaultValue){ 
-                  this.value = '';
-            }
-            if(this.value != this.defaultValue){
+          $('input[type="text"]').focus(function() {
+            $(this).removeClass("idleField").addClass("focusField");
+            if (this.value == this.defaultValue){ 
+              this.value = '';
+              }
+              if(this.value != this.defaultValue){
                 this.select();
               }
-            });
-            $('input[type="text"]').blur(function() {
+          });
+          $('input[type="text"]').blur(function() {
               $(this).removeClass("focusField").addClass("idleField");
                 if ($.trim(this.value) == ''){
-                this.value = (this.defaultValue ? this.defaultValue : '');
+                  this.value = (this.defaultValue ? this.defaultValue : '');
             }
-            });
+          });
+            
+          $('#messagebox > ul').tabs({ fx: { height: 'toggle', opacity: 'toggle' } });
+          $('#featuredvid > ul').tabs();
         });
             

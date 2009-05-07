@@ -12,6 +12,11 @@
 
 /* Start custom button CSS here
 ---------------------------------------- */
+span img {
+  position:relative;
+  top:4px;
+}
+
 .btn {
   display:inline-block;
   background:none;
@@ -159,6 +164,8 @@ div.bubble div.rounded {
   margin-bottom: 10px;
   border: 3px solid #fff;
   background-color: #b7e0ff;
+  max-height:1000px;
+/*  overflow:hidden;  */
 }
 div.bubble div.rounded blockquote {
   border: 0;
@@ -188,3 +195,80 @@ div#pimped.bubble div.rounded {
 div#pimped.bubble cite.rounded {
   background: transparent url(tip-pimped.gif) no-repeat 15px 0;
 }
+
+/* JQUERY TABS */
+
+.widget {
+width: 100%;
+margin-top: 20px;
+margin-bottom: 20px;
+background: #f3f1eb;
+border-top: 1px solid #dedbd1;
+border-bottom: 1px solid #dedbd1;
+}
+
+  .widget a {
+  color: #222;
+  text-decoration: none;
+  }
+  
+  .widget a:hover {
+  color: #009;
+  text-decoration: underline;
+  }
+
+  .tabnav li {
+  display: inline;
+  list-style: none;
+  padding-right: 5px;
+  }
+  
+    .tabnav li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #222;
+    font-weight: bold;
+    padding: 4px 6px;
+    outline: none;
+    }
+    
+    .tabnav li a:hover, .tabnav li a:active, .tabnav li.ui-tabs-selected a {
+    background: #dedbd1;
+    color: #222;
+    text-decoration: none;
+    }
+    
+  .tabdiv {
+  color:#000;
+  margin-top: 2px;
+  background: #fff;
+  border: 1px solid #dedbd1;
+  padding: 5px;
+  }
+  
+    .tabdiv li {
+    list-style-image: url("star.png");
+    margin-left: 20px;
+    }
+
+.ui-tabs-hide {
+    display: none;
+    }
+
+    #featuredvid {
+    text-align: center;
+    }
+    
+      .fvid {
+      margin-bottom: 5px;
+      }
+    
+      .vidselector li {
+      text-align: left;
+      list-style: none;
+      padding: 5px;
+      background: #ffffff;
+      border: 1px solid #dedbd1;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      }
