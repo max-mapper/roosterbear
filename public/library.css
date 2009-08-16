@@ -216,6 +216,10 @@ border-bottom: 1px solid #dedbd1;
   color: #009;
   text-decoration: underline;
   }
+  
+  .ui-tabs-nav {
+    padding-left:0px;
+  }
 
   .tabnav li {
   display: inline;
@@ -233,7 +237,6 @@ border-bottom: 1px solid #dedbd1;
     }
     
     .tabnav li a:hover, .tabnav li a:active, .tabnav li.ui-tabs-selected a {
-    background: #dedbd1;
     color: #222;
     text-decoration: none;
     }

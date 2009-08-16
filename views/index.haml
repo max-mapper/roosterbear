@@ -20,29 +20,13 @@
         %ul.tabnav
           %li
             %a{:href => "#text"}
-              text
-          %li
-            %a{:href => "#url"}
-              url
-          %li
-            %a{:href => "#photo"}
-              photo
-          %li
-            %a{:href => "#video"}
-              video
+              enter any combination of text/links/youtube/vimeo/image urls or email your post to post@glitterbacon.com
         
         #text.tabdiv
           #messageform
             %form{:method => "post", :action => "/entry", :id => "send-comment"}
               %input{:type => "text", :value => "type here, hit enter", :name => "status", :id => "status"}
               %button{:type => "submit"}
-        #url.tabdiv
-          pending
-        #photo.tabdiv
-          pending
-        #video.tabdiv
-          pending
-
       #header
         #nav
           %a{:href => "/view/#{@username}"}
@@ -59,6 +43,8 @@
 
     - else
       #header
+        #title
+          GLITTERBACON.COM IS THE NEW TWITTER
         #sign_in_button
           %form{:method => "post", :action => "https://www.google.com/accounts/o8/ud?openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.return_to=http%3A%2F%2Fwww.glitterbacon.com%2Flogin%3F_method%3Dpost&openid.realm=http%3A%2F%2Fwww.glitterbacon.com%2F&openid.assoc_handle=ABSmpf6DNMw&openid.mode=checkid_setup&openid.ns.ext1=http%3A%2F%2Fopenid.net%2Fsrv%2Fax%2F1.0&openid.ext1.mode=fetch_request&openid.ext1.type.email=http%3A%2F%2Faxschema.org%2Fcontact%2Femail&openid.ext1.required=email"}
             %button{:type => "submit", :class => "btn"}
@@ -68,23 +54,15 @@
                   Sign in with
                   %img{:src => "google.png"}
     #posts
-      #content
-        - if @username
-          - @allentries.each do |post|
-            - post.each do |entry, username|
-              .bubble
-                .rounded
-                  %blockquote
-                    = auto_html(escaped entry)
-                %cite.rounded
-                  %a{:href => "/view/#{username}"}= username
-        - else
-          #welcome
-            This is Glitterbacon
-            #tagline
-              It runs on Roosterbear
-            #tagline2
-              Which just so happens to be the new Twitter
+      #content{:style => "height:600px"}
+        - @allentries.each do |post|
+          - post.each do |entry, username|
+            .bubble
+              .rounded
+                %blockquote
+                  = auto_html(escaped entry)
+              %cite.rounded
+                %a{:href => "/view/#{username}"}= username
       :javascript
         settings = {
         tl: { radius: 10 },
@@ -132,4 +110,10 @@
           $('#messagebox > ul').tabs({ fx: { height: 'toggle', opacity: 'toggle' } });
           $('#featuredvid > ul').tabs();
         });
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        try {
+        var pageTracker = _gat._getTracker("UA-9175003-1");
+        pageTracker._trackPageview();
+        } catch(err) {}
             

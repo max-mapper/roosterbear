@@ -12,6 +12,7 @@ h1, h2 {
 
 blockquote {
   overflow: hidden;
+  text-align:center;
 }
 
 a {
@@ -74,6 +75,8 @@ a {
 
 #content {
   z-index:-1;
+/*  background-image:url('/postyeah.png');
+*/  background-repeat: no-repeat; 
 }
 
 #welcome {
@@ -94,7 +97,7 @@ a {
   padding-top:15px;
 }
 
-#title, #postToggle {
+#postToggle {
   float:none;
   color: white;
   display: block;
@@ -103,7 +106,20 @@ a {
   height: 40px;
   line-height: 40px;
   text-align: center;
-  padding-right:160px;
+  padding-right:140px;
+  padding-top:3px;
+}
+
+#title {
+  float:none;
+  color: white;
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  padding-right:15px;
   padding-top:3px;
 }
 

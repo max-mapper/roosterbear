@@ -21,6 +21,6 @@ Roosterbear uses an OpenID extension to facilitate a Google login mechanism. If 
 
 ## "Roosterbear?"
 
-The name is a complete joke, half inspired by ridiculous web2.0 mashup names and half inspired by ridiculous indie rock band names. Credit for the name goes to Michael Felix. 
+The name is a complete joke, half inspired by ridiculous web2.0 mashup names and half inspired by ridiculous indie rock band names. Credit for the name goes to Vernon Effalo. 
 
 I engineered Roosterbear to be lightweight, fast, extensible and scalable but also highly usable and deployable for web projects large and small. If you do something cool with Roosterbear, let me know!
